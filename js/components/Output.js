@@ -17,7 +17,7 @@ var Output = React.createClass({
         var component = this
 
         var imagesJSX = this.props.output.map(function(o, index){
-            var width = 100 * o
+            var width = 20 + (100 * o)
             return (
                 <img src="img/grandma.jpg" width={width} onClick={component.prepareCorrection.bind(component, index)}/>
             )
