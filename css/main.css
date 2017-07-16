@@ -1,4 +1,45 @@
-.outputCell {
-    width: 20%;
+#logo {
+    display: inline-block;
+}
+
+#title {
+    display: inline-block;
+    padding: 30px;
+}
+
+#day-input {
+    float: left;
+    width: 10%;
+    margin: 10px;
+    margin-top: 0px;
+}
+
+#hour-input {
+    float: left;
+    width: 80%;
+}
+
+#neural-component {
+    padding: 30px;
+}
+
+#output-cells {
+    height: 200px;
+    margin: 20px;
+}
+
+.output-cell {
+    width: 25%;
+    display: inline-block;
+}
+.output-cell img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+}
+
+.chart-container {
+    width: 25%;
     display: inline-block;
 }

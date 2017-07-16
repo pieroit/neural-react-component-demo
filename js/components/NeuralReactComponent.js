@@ -1,7 +1,8 @@
-import React  from 'react'
+import React         from 'react'
 import { Architect } from 'synaptic'
-import Form   from './Form'
-import Output from './Output'
+import Form          from './Form'
+import Output        from './Output'
+import Inspector     from './Inspector'
 
 var NeuralComponent = React.createClass({
 
@@ -67,15 +68,19 @@ var NeuralComponent = React.createClass({
 
     trainCycle: function(){
 
-        // lr = 0.7 / n
+        // lr = 0.1 / n
         // epochs = 100
         // bisogna insistere sugli ultimi pattern
+
+        // lr = 0.1 / n
+        // epochs = 10000
+        // impara meglio
 
         var component = this
 
         var numExperiences = this.experience.length
         var learningRate   = 0.1 / numExperiences
-        var epochs         = 100
+        var epochs         = 10000
 
         for(var i=0; i<epochs; i++){
             this.experience.forEach(function(experience){
@@ -88,9 +93,10 @@ var NeuralComponent = React.createClass({
     render: function(){
 
         return (
-            <div>
+            <div id="neural-component">
                 <Form currentInput={this.state.currentInput} onChange={this.changeCurrentInput} />
                 <Output output={this.state.currentOutput} correction={this.correctCurrentOutput}/>
+                <Inspector net={this.brain} />
             </div>
         )
     }

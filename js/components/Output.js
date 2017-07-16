@@ -16,17 +16,24 @@ var Output = React.createClass({
 
         var component = this
 
+        var imagesSrc = [
+            "img/bed.png",
+            "img/working.png",
+            "img/pizza.png",
+            "img/party.png",
+        ]
+
         var imagesJSX = this.props.output.map(function(o, index){
-            var width = 20 + (100 * o)
+            var width = 50 + (100 * o)
             return (
-                <span className="outputCell">
-                    <img src="img/pollo.png" width={width} onClick={component.prepareCorrection.bind(component, index)}/>
+                <span className="output-cell">
+                    <img src={imagesSrc[index]} width={width} onClick={component.prepareCorrection.bind(component, index)}/>
                 </span>
             )
         })
 
         return (
-            <div>
+            <div id="output-cells">
                 {imagesJSX}
             </div>
         )

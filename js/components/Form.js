@@ -19,14 +19,15 @@ var Form = React.createClass({
 
         return (
             <div>
+                <h2>It is {hour}:00 in a {dayType}</h2>
                 <form onChange={this.onChange}>
-                    <input type="range" min="0" max="24" name="hour" value={hour} />
-                    <select name="dayType">
+                    <select id="day-input" name="dayType">
                         <option value="work day">Work day</option>
                         <option value="weekend">Weekend</option>
                     </select>
+                    <input id="hour-input" type="range" min="0" max="24" name="hour" value={hour} />
                 </form>
-                <h3>It is {hour}:00 in a {dayType}</h3>
+                <br/>
             </div>
         )
     }
