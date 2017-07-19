@@ -40,12 +40,17 @@ var Inspector = React.createClass({
                 <div className="chart-container">
                     <VictoryChart height={400}>
                         <VictoryScatter
-
                             domain={{x:[0,1],y:[0,1]}}
-                            size={function(d){
-                                return d['activation'] * 10
-                            }}
+                            size={15}
                             data={resProfile}
+                            style={{
+                                data: {
+                                    fill  : 'black',
+                                    fillOpacity: function(d){
+                                        return d['activation']
+                                    }
+                                }
+                            }}
                         />
                         <VictoryAxis dependentAxis label="dayType" />
                         <VictoryAxis label="hour" />

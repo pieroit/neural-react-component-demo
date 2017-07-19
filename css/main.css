@@ -1,5 +1,9 @@
 #logo {
     display: inline-block;
+    margin-left: 30px;
+}
+#logo img {
+    vertical-align: bottom;
 }
 
 #title {
