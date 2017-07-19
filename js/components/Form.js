@@ -9,6 +9,7 @@ var Form = React.createClass({
         var formValues = Object.assign({}, this.props.currentInput)
         formValues[name] = value
 
+        // notify parent of form change
         this.props.onChange(formValues)
     },
 

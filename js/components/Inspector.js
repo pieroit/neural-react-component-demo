@@ -38,8 +38,9 @@ var Inspector = React.createClass({
         var responseProfileChartsJSX = outputNeuronsResponseProfile.map(function(resProfile){
             return (
                 <div className="chart-container">
-                    <VictoryChart>
+                    <VictoryChart height={400}>
                         <VictoryScatter
+
                             domain={{x:[0,1],y:[0,1]}}
                             size={function(d){
                                 return d['activation'] * 10

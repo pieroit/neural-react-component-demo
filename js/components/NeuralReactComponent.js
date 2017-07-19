@@ -9,28 +9,23 @@ var NeuralComponent = React.createClass({
     getInitialState: function(){
         return {
             currentInput: {
-                hour    :4,
+                hour    : 4,
                 dayType : "work day"
             },
-            currentOutput: []
+            currentOutput: [0.5, 0.5, 0.5, 0.5]
         }
     },
 
     componentWillMount: function(){
         // Create network
-        this.brain      = new Architect.Perceptron(2, 4, 4)
+        this.brain      = new Architect.Perceptron(2, 5, 4)
         this.experience = []
-    },
-
-    componentWillUpdate: function(){
-        // Train network
-
     },
 
     inputPreparation: function(input){
 
         var scaledHour    = input["hour"] / 24.0
-        var binaryDayType = input["dayType"] == "work day" ? 1.0 : 0.0
+        var binaryDayType = input["dayType"] == "work day" ? 0.0 : 1.0
 
         return [ scaledHour, binaryDayType ]
     },
@@ -68,19 +63,11 @@ var NeuralComponent = React.createClass({
 
     trainCycle: function(){
 
-        // lr = 0.1 / n
-        // epochs = 100
-        // bisogna insistere sugli ultimi pattern
-
-        // lr = 0.1 / n
-        // epochs = 10000
-        // impara meglio
-
         var component = this
 
         var numExperiences = this.experience.length
-        var learningRate   = 0.1 / numExperiences
-        var epochs         = 10000
+        var learningRate   = 0.02// / numExperiences
+        var epochs         = 50000
 
         for(var i=0; i<epochs; i++){
             this.experience.forEach(function(experience){
