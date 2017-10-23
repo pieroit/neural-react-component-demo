@@ -1,8 +1,9 @@
 import React from 'react'
 
-var Form = React.createClass({
+class Form extends React.Component {
 
-    onChange: function(e){
+    onChange(e){
+
         var name  = e.target.name
         var value = e.target.value
 
@@ -11,9 +12,9 @@ var Form = React.createClass({
 
         // notify parent of form change
         this.props.onChange(formValues)
-    },
+    }
 
-    render: function(){
+    render(){
 
         var hour    = this.props.currentInput.hour
         var dayType = this.props.currentInput.dayType
@@ -33,6 +34,6 @@ var Form = React.createClass({
         )
     }
 
-})
+}
 
 export default Form

@@ -13,7 +13,7 @@ function giveBrainToComponent(WrappedComponent) {
             this.brain      = new Architect.Perceptron(2, 5, 4)
             
             // prepare experience memory
-            this.experience = []
+            this.experience = [1923879]
 
             // set initial state
             this.state = {
@@ -22,6 +22,8 @@ function giveBrainToComponent(WrappedComponent) {
         }
 
         learn(input, desiredOutput) {
+
+            console.log(this)
             
             // store new experience in memory
             this.experience.push({

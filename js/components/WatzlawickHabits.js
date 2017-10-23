@@ -3,61 +3,45 @@ import { Architect } from 'synaptic'
 import Form          from './Form'
 import Output        from './Output'
 
-var WatzlawickHabits = React.createClass({
+class WatzlawickHabits extends React.Component {
 
-    getInitialState: function(){
-        return {
+    constructor(props) {
+        super(props)
+
+        this.state = {
             currentInput: {
                 hour    : 4,
                 dayType : "work day"
-            },
-            currentOutput: [0.5, 0.5, 0.5, 0.5]
+            }
         }
-    },
+    }
 
-    inputPreparation: function(input){
+    inputPreparation = (input) => {
 
         var scaledHour    = input["hour"] / 24.0
         var binaryDayType = input["dayType"] == "work day" ? 0.0 : 1.0
 
         return [ scaledHour, binaryDayType ]
-    },
+    }
 
-    changeCurrentInput: function(input){
+    changeCurrentInput = (input) => {
 
         var inputVector = this.inputPreparation(input)
-        //var output = this.brain.activate(inputVector)
+        //var output = this.brain.activate(inputVector) TOD TODO TODO
 
         this.setState({
-            currentInput: input,
-            currentOutput: output
+            currentInput: input
         })
-    },
+    }
 
-    correctCurrentOutput: function(correctReply){
-        
+    correctCurrentOutput = (correctReply) => {
+        console.log(this)
         var inputVector = this.inputPreparation(this.state.currentInput)
 
         this.props.learnFromExperience(inputVector, correctReply) 
-    },
+    }
 
-    trainCycle: function(){
-
-        var component = this
-
-        var numExperiences = this.experience.length
-        var learningRate   = 0.02// / numExperiences
-        var epochs         = 50000
-
-        for(var i=0; i<epochs; i++){
-            this.experience.forEach(function(experience){
-                component.brain.activate(experience.in)
-                component.brain.propagate(learningRate, experience.out)
-            })
-        }
-    },
-
-    render: function(){
+    render(){
 
         return (
             <div id="neural-component">
@@ -67,6 +51,6 @@ var WatzlawickHabits = React.createClass({
         )
     }
 
-})
+}
 
 export default WatzlawickHabits

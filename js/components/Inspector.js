@@ -1,9 +1,9 @@
 import React from 'react'
 import { VictoryScatter, VictoryAxis, VictoryChart } from 'victory'
 
-var Inspector = React.createClass({
+class Inspector extends React.Component {
 
-    sampleResponseProfile: function(){
+    sampleResponseProfile(){
 
         var net = this.props.net
 
@@ -29,9 +29,9 @@ var Inspector = React.createClass({
 
         return responseProfiles
 
-    },
+    }
 
-    render: function(){
+    render(){
 
         var outputNeuronsResponseProfile = this.sampleResponseProfile()
 
@@ -66,6 +66,6 @@ var Inspector = React.createClass({
         )
     }
 
-})
+}
 
 export default Inspector

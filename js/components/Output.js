@@ -1,6 +1,6 @@
 import React from 'react'
 
-var Output = React.createClass({
+class Output extends React.Component {
 
     prepareCorrection(index){
 
@@ -10,9 +10,9 @@ var Output = React.createClass({
         correctOutput[index] = 1.0
 
         this.props.correction(correctOutput)
-    },
+    }
 
-    render: function(){
+    render(){
 
         var component = this
 
@@ -39,6 +39,6 @@ var Output = React.createClass({
         )
     }
 
-})
+}
 
 export default Output
