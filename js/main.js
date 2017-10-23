@@ -1,20 +1,23 @@
-import React           from 'react'
-import ReactDOM        from 'react-dom'
-import Header          from './components/Header'
-import NeuralComponent from './components/NeuralReactComponent'
+import React                from 'react'
+import ReactDOM             from 'react-dom'
+import Header               from './components/Header'
+import giveBrainToComponent from './NeuralHighOrderComponent'
+import WatzlawickHabits from './components/WatzlawickHabits'
+
 
 var launchApp = function() {
 
+    // use HOC
+    var NeuralWatzlawickHabits = giveBrainToComponent(WatzlawickHabits)
+
     ReactDOM.render(
         <div>
-
             <Header/>
-
-            <NeuralComponent/>
-
+            <NeuralWatzlawickHabits/>
         </div>,
         document.getElementById('app')
     )
 }
+
 
 launchApp()
