@@ -25,6 +25,7 @@ class Output extends React.Component {
         
         var imagesJSX = this.props.output.map(function(o, index){
             var width = 50 + (100 * o)
+
             return (
                 <span className="output-cell">
                     <img src={imagesSrc[index]} width={width} onClick={component.prepareCorrection.bind(component, index)}/>

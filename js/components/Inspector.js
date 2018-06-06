@@ -6,8 +6,6 @@ class Inspector extends React.Component {
 
     sampleResponseProfile(){
 
-        var net = this.props.net
-
         var responseProfiles = [
             [],[],[],[]
         ]
@@ -18,7 +16,7 @@ class Inspector extends React.Component {
         for(var xStep=min; xStep<=max; xStep+=step){
             for(var yStep=min; yStep<=max; yStep+=step){
 
-                var out = net.predict( tf.tensor([[xStep, yStep]]) )
+                var out = this.props.predict( [xStep, yStep], true )
                 for(var o=0; o<out.length; o++){
                     responseProfiles[o].push({
                         x: xStep,

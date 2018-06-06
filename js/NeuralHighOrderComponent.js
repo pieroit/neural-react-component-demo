@@ -22,10 +22,10 @@ function giveBrainToComponent(WrappedComponent) {
         }
 
         newBrain() {
-            //this.brain = new Architect.Perceptron(2, 5, 4)
+            // feed-forward classifier neural net with shape 2 -> 5 -> 4
             this.brain = tf.sequential()
             this.brain.add(tf.layers.leakyReLU( {units: 5, inputShape: [2]} ) )
-            this.brain.add(tf.layers.softmax( {units: 4} ) )
+            this.brain.add(tf.layers.dense( {units: 4, activation:'softmax'} ) )
             this.brain.compile({optimizer: 'sgd', loss: 'meanSquaredError'})
         }
 
@@ -43,41 +43,51 @@ function giveBrainToComponent(WrappedComponent) {
             // replay memory
             this.memoryReplay()
 
-            this.predict(input)
+            //this.predict(input)
         }
 
-        async memoryReplay() {
+        predict(input, returnResult=false) {
+            // pass input to the net
+            let inputTensor      = tf.tensor( [input] )
+            let outputTypedArray = this.brain.predict(inputTensor).dataSync()
+            let output           = Array.from(outputTypedArray)
             
-            var component = this
-            var numExperiences = this.experience.length
-            var learningRate   = 0.05
-            var epochs         = 2000
+            if(returnResult) {
+                return output
+            } else {
+                // trigger a render (prediction will be passed to the wrapped component via props)
+                this.setState({
+                    'prediction': output
+                })
+            }
+        }
+
+        memoryReplay() {
+            
+            let component = this
 
             // convert experience to tensors
-            let xTensor = []
-            let yTensor = []
+            let xTensor   = []
+            let yTensor   = []
+            let lastInput = undefined
             this.experience.forEach(function(exp){
                 xTensor.push(exp.in)
                 yTensor.push(exp.out)
+                lastInput = exp.in
             })
             xTensor= tf.tensor(xTensor)
             yTensor= tf.tensor(yTensor)
 
             // train the net
-            await this.brain.fit(xTensor, yTensor)
-
-        }
-
-        predict(input) {
-
-            // pass input to the net
-            var inputTensor = tf.tensor( [input] )
-            var output      = this.brain.predict(inputTensor).dataSync()
-
-            // trigger a render (prediction will be passed to the wrapped component via props)
-            this.setState({
-                'prediction': output
+            let trainingOptions = {
+                epochs: 100,
+                batchSize: 1,
+            }
+            this.brain.fit(xTensor, yTensor, trainingOptions).then(function(s){
+                console.log(s, 'finish training')
+                component.predict(lastInput)
             })
+
         }
 
         render() {
@@ -89,7 +99,7 @@ function giveBrainToComponent(WrappedComponent) {
                         prediction={this.state.prediction}
                         {...this.props}
                     />
-                    <Inspector net={this.brain} />
+                    <Inspector net={this.brain} predict={this.predict.bind(this)} />
                 </div>
             )
         }
