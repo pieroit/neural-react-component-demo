@@ -1,5 +1,6 @@
 import React from 'react'
 import { VictoryScatter, VictoryAxis, VictoryChart } from 'victory'
+import * as tf       from '@tensorflow/tfjs'
 
 class Inspector extends React.Component {
 
@@ -16,7 +17,8 @@ class Inspector extends React.Component {
         var max  = 1
         for(var xStep=min; xStep<=max; xStep+=step){
             for(var yStep=min; yStep<=max; yStep+=step){
-                var out = net.activate([xStep, yStep])
+
+                var out = net.predict( tf.tensor([[xStep, yStep]]) )
                 for(var o=0; o<out.length; o++){
                     responseProfiles[o].push({
                         x: xStep,
