@@ -10,10 +10,10 @@ function giveBrainToComponent(WrappedComponent) {
             super(props)
 
             // create neural net
-            this.brain      = new Architect.Perceptron(2, 5, 4)
+            this.brain = new Architect.Perceptron(2, 5, 4)
             
             // prepare experience memory
-            this.experience = [1923879]
+            this.experience = []
 
             // set initial state
             this.state = {
@@ -22,8 +22,6 @@ function giveBrainToComponent(WrappedComponent) {
         }
 
         learn(input, desiredOutput) {
-
-            console.log(this)
             
             // store new experience in memory
             this.experience.push({
@@ -41,8 +39,11 @@ function giveBrainToComponent(WrappedComponent) {
             
             var component = this
             var numExperiences = this.experience.length
-            var learningRate   = 0.02
-            var epochs         = 10000
+            var learningRate   = 0.05
+            var epochs         = 2000
+
+            // create neural net every time from scratch
+            this.brain = new Architect.Perceptron(2, 5, 4)
     
             for(var e=0; e<epochs; e++){
                 this.experience.forEach(function(experience) {
@@ -67,8 +68,8 @@ function giveBrainToComponent(WrappedComponent) {
             return (
                 <div>
                     <WrappedComponent
-                        getPrediction={this.predict}
-                        learnFromExperience={this.learn}
+                        getPrediction={this.predict.bind(this)}
+                        learnFromExperience={this.learn.bind(this)}
                         prediction={this.state.prediction}
                         {...this.props /*TODO: verify this works*/}
                     />

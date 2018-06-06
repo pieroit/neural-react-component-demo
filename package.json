@@ -17,22 +17,22 @@
     "deepcopy": "^0.6.3",
     "dimple-js": "^2.1.4",
     "font-awesome": "^4.7.0",
-    "moment": "^2.15.2",
-    "react": "^16.0.0",
+    "moment": "^2.22.2",
+    "react": "^16.4.0",
     "react-bootstrap": "^0.30.10",
-    "react-dom": "^16.0.0",
-    "react-redux": "^4.4.8",
+    "react-dom": "^16.4.0",
+    "react-redux": "^4.4.9",
     "redux": "^3.6.0",
-    "synaptic": "^1.0.12",
-    "underscore": "^1.8.3",
-    "victory": "^0.21.2"
+    "synaptic": "^1.1.4",
+    "underscore": "^1.9.1",
+    "victory": "^0.21.5"
   },
   "devDependencies": {
     "babel-preset-latest": "^6.22.0",
     "babel-preset-react": "^6.11.1",
     "babelify": "^7.3.0",
     "browserify": "^13.1.0",
-    "watchify": "^3.7.0"
+    "watchify": "^3.11.0"
   },
   "babel": {
     "presets": [

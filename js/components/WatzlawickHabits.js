@@ -7,7 +7,7 @@ class WatzlawickHabits extends React.Component {
 
     constructor(props) {
         super(props)
-
+        
         this.state = {
             currentInput: {
                 hour    : 4,
@@ -15,8 +15,8 @@ class WatzlawickHabits extends React.Component {
             }
         }
     }
-
-    inputPreparation = (input) => {
+     
+    inputPreparation(input) {
 
         var scaledHour    = input["hour"] / 24.0
         var binaryDayType = input["dayType"] == "work day" ? 0.0 : 1.0
@@ -24,20 +24,19 @@ class WatzlawickHabits extends React.Component {
         return [ scaledHour, binaryDayType ]
     }
 
-    changeCurrentInput = (input) => {
+    changeCurrentInput(input) {
 
         var inputVector = this.inputPreparation(input)
-        //var output = this.brain.activate(inputVector) TOD TODO TODO
+        var output      = this.props.getPrediction(inputVector)
 
         this.setState({
             currentInput: input
         })
     }
 
-    correctCurrentOutput = (correctReply) => {
-        console.log(this)
+    correctCurrentOutput(correctReply) {
+        
         var inputVector = this.inputPreparation(this.state.currentInput)
-
         this.props.learnFromExperience(inputVector, correctReply) 
     }
 
@@ -45,8 +44,8 @@ class WatzlawickHabits extends React.Component {
 
         return (
             <div id="neural-component">
-                <Form currentInput={this.state.currentInput} onChange={this.changeCurrentInput} />
-                <Output output={this.props.prediction} correction={this.correctCurrentOutput}/>
+                <Form currentInput={this.state.currentInput} onChange={this.changeCurrentInput.bind(this)} />
+                <Output output={this.props.prediction} correction={this.correctCurrentOutput.bind(this)}/>
             </div>
         )
     }

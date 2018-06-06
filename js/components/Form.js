@@ -22,7 +22,7 @@ class Form extends React.Component {
         return (
             <div>
                 <h2>It is {hour}:00 in a {dayType}</h2>
-                <form onChange={this.onChange}>
+                <form onChange={this.onChange.bind(this)}>
                     <select id="day-input" name="dayType">
                         <option value="work day">Work day</option>
                         <option value="weekend">Weekend</option>

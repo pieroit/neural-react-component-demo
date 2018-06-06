@@ -22,7 +22,7 @@ class Output extends React.Component {
             "img/pizza.png",
             "img/party.png",
         ]
-
+        
         var imagesJSX = this.props.output.map(function(o, index){
             var width = 50 + (100 * o)
             return (
